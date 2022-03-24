@@ -1,5 +1,5 @@
 <?php
-file_put_contents('log.txt', 'request start time:' . time() . "\n");
+file_put_contents('./log/log.txt', 'request start time:' . time() . "\n");
 sleep(3);
-file_put_contents('log.txt', 'request end time:' . time(), FILE_APPEND);
+file_put_contents('./log/log.txt', 'request end time:' . time(), FILE_APPEND);
 echo 'hello world';
