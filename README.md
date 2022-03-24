@@ -144,9 +144,8 @@ cd php
 
 touch phpinfo.php
 
-<?php
-
-phpinfo();
+    <?php
+    phpinfo();
 
 http://localhost:8080/phpinfo.php
 
