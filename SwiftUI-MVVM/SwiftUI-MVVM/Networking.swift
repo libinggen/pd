@@ -24,7 +24,7 @@ public class Networking {
                 debugPrint(json)
                 successBlock(method.rawValue,json,"")
             case .failure(let error):
-                print(error)
+                debugPrint(error)
             }
         }
     }

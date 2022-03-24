@@ -52,6 +52,7 @@ struct PersistenceController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        Database.setupDatabase()
         Networking.request(url: "") { type, result, msg in
             print(type,result,msg)
         }
