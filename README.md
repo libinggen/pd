@@ -52,7 +52,7 @@ git branch -d some-feature
 
 --如果需要删除远程feature分支:
 
-git push origin --delete feature
+git push origin --delete some-feature
 
 
 
@@ -127,6 +127,10 @@ git add .
 git commit -m "command"
 
 git push
+
+git stash
+
+git restore
 
 
 
