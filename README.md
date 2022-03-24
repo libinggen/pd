@@ -47,7 +47,7 @@ git branch -d release-0.1.0
 git push origin --delete release-0.1.0   
 
 -- 合并master/devlop分支之后，打上tag 
-git tag -a v0.1.0 master
+git tag -a v0.1.0 -m"2022-03-24 git command" master
 git push --tags
 
 
@@ -65,7 +65,7 @@ git push
 git branch -d hotfix-0.1.1
 git push origin --delete  hotfix-0.1.1 
 
-git tag -a v0.1.1 master
+git tag -a v0.1.0 -m"2022-03-24 hotfix" master
 git push --tags
 
 
