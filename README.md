@@ -7,8 +7,18 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/libinggen/pd.git
 git push -u origin main
+git branch dev
+git checkout dev
+git add .
+git commit -m "command"
+git push --set-upstream origin dev
 
 # cd
+git status
+git diff
+git commit --help
+git commit -m <msg>, --message=<msg>
+
 mkdir    创建一个目录    mkdir dirname
 rmdir    删除一个目录    rmdir dirname
 mvdir    移动或重命名一个目录    mvdir dir1 dir2
