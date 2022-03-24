@@ -52,5 +52,8 @@ struct PersistenceController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        Networking.request(url: "") { type, result, msg in
+            print(type,result,msg)
+        }
     }
 }
