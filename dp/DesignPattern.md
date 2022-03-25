@@ -1,3 +1,7 @@
+# DesignPattern
+
+## 对象
+
 <style>
 table th:first-of-type {
     width: 20%;
@@ -9,10 +13,6 @@ table th:nth-of-type(3) {
     width: 50%;
 }
 </style>
-# DesignPattern
-
-## 对象
-
 | 设计模式 | 特征 | 实现 |
 | :- | :- | :- |
 | 对象模板 | 封装、索引无关 | 变量名，初始化 - T.M(T.D) |
