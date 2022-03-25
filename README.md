@@ -132,6 +132,23 @@ git stash
 
 git restore
 
+-- 
+
+php -v
+
+mkdir php
+
+php -S 0.0.0.0:端口 -t 目录
+
+cd php
+
+touch phpinfo.php
+
+    <?php
+    phpinfo();
+
+http://localhost:8080/phpinfo.php
+
 
 
 # cd
