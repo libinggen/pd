@@ -4,15 +4,16 @@
 
 <style>
 table th:first-of-type {
-    width: 20%;
+    width: 4cm;
 }
 table th:nth-of-type(2) {
-    width: 30%;
+    width: 150pt;
 }
 table th:nth-of-type(3) {
-    width: 50%;
+    width: 8em;
 }
 </style>
+
 | 设计模式 | 特征 | 实现 |
 | :- | :- | :- |
 | 对象模板 | 封装、索引无关 | 变量名，初始化 - T.M(T.D) |
