@@ -2,6 +2,8 @@
 
 https://leetcode.com
 
+## Java
+
 ## Easy
 
 1. Two Sum
