@@ -7,7 +7,7 @@
 | Vue | Git | 网络 | RxSwift | 组模化 | 打包 | 内存 | CI | 编码 |  | 产品 | 培训 |
 | React | SVN | SwiftUI | 模式接口 | 版本 | 网络 | Crash | 加密 |  |  |  | 招人 |
 | Java | MOCK |  | CoreData | 重构 | 三方 | UI |  |  |  |  |  |
-| PHP | WST |  |  | Autolayout |  |  |  |  |  |  |  |
+| PHP | WST |  | AutoLayout |  |  |  |  |  |  |  |  |
 | Python | INJ |  | SPM |  |  |  |  |  |  |  |  |
 | Go | ELS |  |  |  |  |  |  |  |  |  |  |
 | MySQL | Jenkins |  |  |  |  |  |  |  |  |  |  |
