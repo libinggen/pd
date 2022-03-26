@@ -20,3 +20,6 @@
 | 桥接 | 抽象分离、集中派发 | class Bridge:,{private var: init(:){self.=} func(:){}}，工厂class{class func(type){switch case return()}、class Bridge:,{init(:C.E){self.= class func(type)} func(:){}}} |
 
 ## 行为
+
+| **设计模式** &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | **特征** &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | **实现** |
+| :- | :- | :- |
