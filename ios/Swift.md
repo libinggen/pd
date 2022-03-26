@@ -42,7 +42,7 @@
 
 |**访问级别**|  |
 | :- | :- |
-| 访问级别: | public/internal/prvate/fileprivate |
+| 访问级别: | public internal prvate fileprivate |
 
 |**生命周期**|  |
 | :- | :- |
