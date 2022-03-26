@@ -9,9 +9,11 @@
 | Java | MOCK |  | CoreData | 重构 | 三方 | UI |  |  |  |  |  |
 | PHP | WST |  |  | Autolayout |  |  |  |  |  |  |  |
 | Python | INJ |  | SPM |  |  |  |  |  |  |  |  |
-| Go |  | ELS |  |  |  |  |  |  |  |  |  |
+| Go | ELS |  |  |  |  |  |  |  |  |  |  |
 | MySQL | Jenkins |  |  |  |  |  |  |  |  |  |  |
 
 高阶函数: ```sorted(by:)在前、map(_:)每个、filter(_:)选出、reduce(_:_:)初加``` ```快参$0 1 2 3```
+
 闭包: ```{()->() in} [weak self]```
+
 ```mutating inout 修改``` ```willSet didSet``` 数组 JSON
