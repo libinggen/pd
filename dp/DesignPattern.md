@@ -17,5 +17,6 @@
 | **设计模式** &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | **特征** &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | **实现** |
 | :- | :- | :- |
 | 适配器 | 返回方法 | 扩展extension:{var:{return func()} func{return func()}}，类class:{private let: init{=} var:{return func()} func{return func()}}，双向适配class:,{var: func{.func()} var:{return .}、class var:{get{struct{static let=}return .}}} |
+| 桥接 | 抽象分离、集中派发 | class Bridge:,{private var: init(:){self.=} func(:){}}，工厂class{class func(type){switch case return()}、class Bridge:,{init(:C.E){self.= class func(type)} func(:){}}} |
 
 ## 行为
