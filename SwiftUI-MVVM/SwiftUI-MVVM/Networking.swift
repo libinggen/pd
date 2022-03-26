@@ -13,10 +13,7 @@ public typealias NK = Networking
 
 public class Networking {
     
-    public class func request(url:String,
-                              method: HTTPMethod = .post,
-                              parameters: [String: String] = [:],
-                              successBlock: @escaping (_ type: String, _ result: JSON, _ msg: String) -> Void){
+    public class func request(url:String, method: HTTPMethod = .post, parameters: [String: String] = [:], successBlock: @escaping (_ type: String, _ result: JSON, _ msg: String) -> Void) {
         AF.request(url).response { response in
             debugPrint(response)
             switch response.result {
