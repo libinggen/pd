@@ -57,4 +57,4 @@
 | 并发读写: | 包单执 SERIAL sync 、读多执 CONCURRENT sync、写多加等 barrier_async，GCD、block队列 |
 | 全局队列 global: | background(后台操作)、utility(异步操作)、default(默认特殊)、user-Initiated(触发立返)、user-Interactive(主线阻塞)、unspecified(环境推断) |
 | GCD方法: | dispatch_async(异步操作)、dispatch_once(访问一次)、dispatch_group(多任务完成) |
-| Operation: | Operation(任务 Ready、Executing、Cancelled、finished)、BlockOperation(全局队列、并行多任务)、OperationQueue(多Op队列、maxConcurrentOperationCount)、取消(.cancle :Operation{isCancelled})|
+| Operation: | Operation(任务 Ready、Executing、Cancelled、finished)、BlockOperation(全局队列、并行多任务)、OperationQueue(多Op队列、maxConcurrentOperationCount)、取消(.cancle() :Operation{isCancelled})|
