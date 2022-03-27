@@ -5,9 +5,9 @@
 | 闭合 | 开放 |
 | Code | 配置 |
 
-RCV|VMPI|EM
-
 ## MVVM、VIPER
+
+RCV|VMPI|EM
 
 |**MVVM**|  |  |**VIPER**|  |
 | :- | :- | :- | :- | :- |
