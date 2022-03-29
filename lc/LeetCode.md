@@ -60,14 +60,33 @@ public String reverseVowels(String s) {
 二叉搜索树根结点，范围结点和
 
 root node of a binary search tree, sum of values of all nodes in the inclusive range
+```BST左<节<右```
 
-```BST左<节<右 节空0，节高递左，节低递右，节递左右```
+深度优先
+```节空0，节高递左，节低递右，节递左右```
 ```
 public int rangeSumBST(TreeNode root, int low, int high) {
     if(root == null){return 0;};
     if(root.val > high){return rangeSumBST(root.left,low,high);};
     if(root.val < low){return rangeSumBST(root.right,low,high);};
     return root.val + rangeSumBST(root.left,low,high) + rangeSumBST(root.right,low,high);
+}
+```
+广度优先
+```总0，建队，队加节，队非空，队头节，节空过，节高加左，节低加右，总加节，队加左右，返总```
+```
+public int rangeSumBST(TreeNode root, int low, int high) {
+    int sum = 0;
+    Queue<TreeNode> q = new LinkedList<TreeNode>();
+    q.offer(root);
+    while (!q.isEmpty()){
+        TreeNode node = q.poll();
+        if(node == null){continue;};
+        if(node.val > high){q.offer(node.left);}else
+        if(node.val < low){q.offer(node.right);}else
+        {sum += node.val;q.offer(node.left);q.offer(node.right);}
+    }
+    return sum;
 }
 ```
 
@@ -113,5 +132,23 @@ public int[] twoSum(int[] numbers, int target) {
         }
     }
     return null;
+}
+```
+
+339. Nested List Weight Sum
+```
+public int depthSum(List<NestedInteger> nestedList) {
+    return dfs(nestedList,1);
+}
+private int dfs(List<NestedInteger> list, int depth) {
+    int total =0;
+    for(NestedInteger nested : list){
+        if(nested.isInteger()){
+            total += nested.getInteger() * depth;
+        } else {
+            total += dfs(nested.getList(), depth + 1);
+        }
+    }
+    return total;
 }
 ```
