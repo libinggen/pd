@@ -7,7 +7,7 @@
 
 ## MVVM、VIPER
 
-RCV|VMPI|ME
+RCV UI{()->()in} DTBlock()|VMPI|ME DT{()->()in} UIblock()
 
 |**MVVM**|  |  |**VIPER**|  |
 | :- | :- | :- | :- | :- |
@@ -30,5 +30,5 @@ protocol P{
 |**SwiftUI + MVVM**|  |
 | :- | :- |
 | M: | :ObservableObject 发@Published 类属性 |
-| V: | @Statue $ struct属性 新实例 数变图变，@Binding，@EnvironmentObject，收@ObservedObject 类:ObservableObject，@Environment环境数据 isPresented显示 .wrappedValue.dismiss() |
+| V: | @Statue $ struct属性 新实例 数变图变，@Binding子绑父得父值，@EnvironmentObject环境取 ObservableObject，收@ObservedObject 类:ObservableObject，@Environment环境数据 isPresented显示 .wrappedValue.dismiss()隐藏 |
 | VM: | :ObservableObject 发@Published 类属性 |
