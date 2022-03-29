@@ -61,7 +61,7 @@ public String reverseVowels(String s) {
 
 root node of a binary search tree, sum of values of all nodes in the inclusive range
 
-BST 节空0，节高递左，节低递右，节递左右
+```BST左<节<右 节空0，节高递左，节低递右，节递左右```
 ```
 public int rangeSumBST(TreeNode root, int low, int high) {
     if(root == null){return 0;};
