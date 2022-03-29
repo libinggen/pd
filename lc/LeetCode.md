@@ -60,6 +60,8 @@ public String reverseVowels(String s) {
 二叉搜索树根结点，范围结点和
 
 root node of a binary search tree, sum of values of all nodes in the inclusive range
+
+节空0，节高递左，节低递右，节递左右
 ```
 public int rangeSumBST(TreeNode root, int low, int high) {
     if(root == null){return 0;};
