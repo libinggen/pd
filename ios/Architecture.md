@@ -7,7 +7,7 @@
 
 ## MVVM、VIPER
 
-RCV|VMPI|EM
+RCV|VMPI|ME
 
 |**MVVM**|  |  |**VIPER**|  |
 | :- | :- | :- | :- | :- |
@@ -25,3 +25,10 @@ protocol P{
   func(:AType)
 }
 ```
+
+
+|**SwiftUI + MVVM**|  |
+| :- | :- |
+| M: | :ObservableObject 发@Published 类属性 |
+| V: | @Statue $ struct属性 新实例 数变图变，@Binding，@EnvironmentObject，收@ObservedObject 类:ObservableObject，@Environment环境数据 isPresented显示 .wrappedValue.dismiss() |
+| VM: | :ObservableObject 发@Published 类属性 |

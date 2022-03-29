@@ -33,16 +33,20 @@
 | :- | :- | :- | :- | :- |
 | 存储属性: | var 属性名: 类型=初始值 |  | 函数定义: | mutating func函数名(外参名 形参:参数类型=默认值)->返回类型{} |
 | 计算属性: | var 属性名: 类型{get{} set{}} |  | 函数调用: | 函数名(外参名:实参) |
-| 属性观察 | willSet didSet oldValue newValue |  | 可变参数: | func函数名(形参:参数类型...)->返回类型{} |
-|  |  |  | 传出参数: | func函数名(inout形参:参数类型...)->返回类型{} |
-|  |  |  | 函数类型: | (参数类型,)->返回类型 |
-|  |  |  | 闭包: | ```{(形参:参数类型,)->(返回类型) in [weak self] 表达式``` |
+| 属性观察: | willSet didSet oldValue newValue |  | 可变参数: | func函数名(形参:参数类型...)->返回类型{} |
+| 属性包装器: | @Published @Statue @Binding @EnvironmentObject @ObservedObject @Environment |  | 传出参数: | func函数名(inout形参:参数类型...)->返回类型{} |
+| 惰性属性: | lazy |  | 函数类型: | (参数类型,)->返回类型 |
+| 类型属性: | static let 同类实例共享，override class、static let |  | 闭包: | ```{(形参:参数类型,)->(返回类型) in [weak self] 表达式``` |
 |  |  |  | 高阶函数: | ```sorted(by:)在前、map(_:)每个、filter(_:)选出、reduce(_:_:)初加``` |
 |  |  |  | 快参: | ```$0 1 2 3``` |
 
-|**访问级别**|  |
+|**访问级别**| 可见 | 继承 |
 | :- | :- |
-| 访问级别: | public internal prvate fileprivate |
+| open: | 本模块、引模块 | 本模块、引模块 |
+| public: | 本模块、引模块 | 本模块 |
+| internal默认: | 本模块 | 本模块 |
+| fileprivate: | 本文件 | 本文件  |
+| prvate: | 本作用域  | 本作用域 |
 
 |**生命周期**|  |
 | :- | :- |
