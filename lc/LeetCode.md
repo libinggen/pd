@@ -11,9 +11,7 @@ https://leetcode.com
 public int[] twoSum(int[] nums, int target) {
     Map<Integer,Integer> map = new HashMap<>();
     for(int i=0;i<nums.length;i++) {
-        if(map.containsKey(target-nums[i])){
-            return new int[]{map.get(target-nums[i]),i};
-        }
+        if(map.containsKey(target-nums[i])){return new int[]{map.get(target-nums[i]),i};}
         map.put(nums[i],i);
     }
     return new int[0];
@@ -41,10 +39,8 @@ public String reverseVowels(String s) {
     String vs = "aeiouAEIOU";
     int left = 0, right = s.length()-1;
     while(left<right){
-        while(left<right && !vs.contains(carr[left]+""))
-            left++;
-        while(left<right && !vs.contains(carr[right]+""))
-            right--;
+        while(left<right && !vs.contains(carr[left]+""))left++;
+        while(left<right && !vs.contains(carr[right]+""))right--;
         char temp = carr[left];
         carr[left] = carr[right];
         carr[right] = temp;
@@ -147,14 +143,9 @@ public List<List<Integer>> threeSum(int[] nums) {
             int lo = i+1, hi=nums.length-1;
             while(lo<hi){
                 int sum=nums[i]+nums[lo]+nums[hi];
-                if(sum==0){
-                    res.add(Arrays.asList(nums[i],nums[lo++],nums[hi--]));
-                    while(lo<hi&&nums[lo] == nums[lo-1]){++lo;}
-                }else if(sum<0){
-                    ++lo;
-                }else {
-                    --hi;
-                }
+                if(sum==0){res.add(Arrays.asList(nums[i],nums[lo++],nums[hi--]));while(lo<hi&&nums[lo] == nums[lo-1]){++lo;}
+                }else if(sum<0){++lo;
+                }else {--hi;}
             }
         }
     }
@@ -168,13 +159,9 @@ public int[] twoSum(int[] numbers, int target) {
     int l = 0, r = numbers.length-1;
     while(l < r){
         int sum = numbers[l] + numbers[r];
-        if(sum == target)
-            return new int[]{l+1, r+1};
-        else if(sum < target){
-            ++l;
-        }else{
-            --r;
-        }
+        if(sum == target)return new int[]{l+1, r+1};
+        else if(sum < target){++l;}
+        else{--r;}
     }
     return null;
 }
@@ -214,10 +201,7 @@ public int numIslands(char[][] grid) {
     int num_islands = 0;
     for (int r = 0; r < nr; ++r) {
         for (int c = 0; c < nc; ++c) {
-            if (grid[r][c] == '1') {
-                ++num_islands;
-                dfs(grid, r, c);
-            }
+            if (grid[r][c] == '1') {++num_islands;dfs(grid, r, c);}
         }
     }
 
@@ -228,9 +212,7 @@ private void dfs(char[][] grid, int r, int c) {
     int nr = grid.length;
     int nc = grid[0].length;
 
-    if (r < 0 || c < 0 || r >= nr || c >= nc || grid[r][c] == '0') {
-        return;
-    }
+    if (r < 0 || c < 0 || r >= nr || c >= nc || grid[r][c] == '0') {return;}
 
     grid[r][c] = '0';
     dfs(grid, r - 1, c);
@@ -261,11 +243,8 @@ public int depthSum(List<NestedInteger> nestedList) {
 private int dfs(List<NestedInteger> list, int depth) {
     int total =0;
     for(NestedInteger nested : list){
-        if(nested.isInteger()){
-            total += nested.getInteger() * depth;
-        } else {
-            total += dfs(nested.getList(), depth + 1);
-        }
+        if(nested.isInteger()){total += nested.getInteger() * depth;} 
+        else {total += dfs(nested.getList(), depth + 1);}
     }
     return total;
 }
@@ -282,12 +261,12 @@ Output: [[4,5,3],[2],[1]]
 ```
 public List<List<Integer>> findLeaves(TreeNode root) {
     List<List<Integer>> res = new ArrayList<>();
-    height(root, res);
+    dfs(root, res);
     return res;
 }
-private int height(TreeNode node, List<List<Integer>> res){
+private int dfs(TreeNode node, List<List<Integer>> res){
     if(null==node)  return -1;
-    int level = 1 + Math.max(height(node.left, res), height(node.right, res));
+    int level = 1 + Math.max(dfs(node.left, res), dfs(node.right, res));
     if(res.size()<level+1){res.add(new ArrayList<>())};
     res.get(level).add(node.val);
     return level;
