@@ -142,6 +142,9 @@ public int[] twoSum(int[] numbers, int target) {
 ```
 
 339. Nested List Weight Sum
+
+```遍历组，数总数深，递组加深```
+
 ```
 public int depthSum(List<NestedInteger> nestedList) {
     return dfs(nestedList,1);
