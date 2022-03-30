@@ -60,6 +60,10 @@ public String reverseVowels(String s) {
 二叉搜索树根结点，范围结点和
 
 root node of a binary search tree, sum of values of all nodes in the inclusive range
+```
+Input: root = [10,5,15,3,7,null,18], low = 7, high = 15
+Output: 32
+```
 
 ```BST 左<节<右```
 
@@ -142,6 +146,16 @@ public int[] twoSum(int[] numbers, int target) {
 ```
 
 339. Nested List Weight Sum
+
+```
+nested list of integers nestedList. Each element an integer or a list.
+depth of an integer is the number of lists inside of.
+Return the sum of each integer in nestedList multiplied by its depth.
+
+Input: nestedList = [[1,1],2,[1,1]]
+Output: 10
+Explanation: Four 1's at depth 2, one 2 at depth 1. 1*2 + 1*2 + 2*1 + 1*2 + 1*2 = 10.
+```
 
 ```遍历组，数总数深，递组加深```
 
