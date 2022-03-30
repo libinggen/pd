@@ -60,10 +60,13 @@ public String reverseVowels(String s) {
 二叉搜索树根结点，范围结点和
 
 root node of a binary search tree, sum of values of all nodes in the inclusive range
-```BST左<节<右```
+
+```BST 左<节<右```
 
 深度优先 递左右 插底
+
 ```节空0，节高递左，节低递右，节递左右```
+
 ```
 public int rangeSumBST(TreeNode root, int low, int high) {
     if(root == null){return 0;};
@@ -72,8 +75,11 @@ public int rangeSumBST(TreeNode root, int low, int high) {
     return root.val + rangeSumBST(root.left,low,high) + rangeSumBST(root.right,low,high);
 }
 ```
+
 广度优先 加左右 横扫
+
 ```总0，建队，队加节，队非空，队头节，节空过，节高加左，节低加右，总加节，队加左右，返总```
+
 ```
 public int rangeSumBST(TreeNode root, int low, int high) {
     int sum = 0;
