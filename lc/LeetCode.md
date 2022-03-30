@@ -145,6 +145,66 @@ public int[] twoSum(int[] numbers, int target) {
 }
 ```
 
+200. Number of Islands
+
+```
+二维网格，1陆地、0水，岛屿数量。陆地只能水平或垂直连接。网格四边水。
+```
+
+```
+m x n 2D binary grid '1's (land) and '0's (water), number of islands.
+
+An island is surrounded by water connecting adjacent lands horizontally or vertically. assume all four edges of the grid are all surrounded by water.
+
+Input: grid = [
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
+]
+Output: 3
+```
+```
+空返，行数，列数，岛0，遍行，遍列，格1，岛加1，递格；
+行数，列数，空0返，标记，递左右上下
+```
+```
+public int numIslands(char[][] grid) {
+    if (grid == null || grid.length == 0) {
+        return 0;
+    }
+
+    int nr = grid.length;
+    int nc = grid[0].length;
+    int num_islands = 0;
+    for (int r = 0; r < nr; ++r) {
+        for (int c = 0; c < nc; ++c) {
+            if (grid[r][c] == '1') {
+                ++num_islands;
+                dfs(grid, r, c);
+            }
+        }
+    }
+
+    return num_islands;
+  }
+  
+private void dfs(char[][] grid, int r, int c) {
+    int nr = grid.length;
+    int nc = grid[0].length;
+
+    if (r < 0 || c < 0 || r >= nr || c >= nc || grid[r][c] == '0') {
+        return;
+    }
+
+    grid[r][c] = '0';
+    dfs(grid, r - 1, c);
+    dfs(grid, r + 1, c);
+    dfs(grid, r, c - 1);
+    dfs(grid, r, c + 1);
+}
+```
+
 339. Nested List Weight Sum
 
 ```
