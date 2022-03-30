@@ -55,6 +55,41 @@ public String reverseVowels(String s) {
 }
 ```
 
+543. Diameter of Binary Tree 二叉树直径
+
+```
+二叉树，直径长度，两结点路径长度最大值，边数
+```
+```
+root of binary tree, length of diameter of tree.
+length of longest path two nodes in tree.
+number of edges.
+
+Input: root = [1,2,3,4,5]
+Output: 3
+Explanation: 3 is the length of the path [4,2,1,3] or [5,2,1,3].
+```
+```
+边0，递节，返边；
+节空边0，递左，递右，边大边左右，返大左右1
+```
+```
+private int diameter;
+public int diameterOfBinaryTree(TreeNode root) {
+    diameter = 0;
+    longestPath(root);
+    return diameter;
+}
+private int longestPath(TreeNode node){
+    if(node == null) return 0;
+    int leftPath = longestPath(node.left);
+    int rightPath = longestPath(node.right);
+
+    diameter = Math.max(diameter, leftPath + rightPath);
+    return Math.max(leftPath, rightPath) + 1;
+}
+```
+
 938. Range Sum of BST
 
 二叉搜索树根结点，范围结点和
@@ -145,7 +180,7 @@ public int[] twoSum(int[] numbers, int target) {
 }
 ```
 
-200. Number of Islands
+200. Number of Islands 岛屿数量
 
 ```
 二维网格，1陆地、0水，岛屿数量。陆地只能水平或垂直连接。网格四边水。
