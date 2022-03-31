@@ -39,6 +39,35 @@ public int maxSubArray(int[] nums) {
 }
 ```
 
+101. Symmetric Tree 对称二叉树
+
+```
+二叉树根节点，轴对称
+```
+```
+root of binary tree, check mirror of itself (symmetric around center).
+
+Input: root = [1,2,2,3,4,4,3]
+Output: true
+```
+```
+递根根；
+空且空真，空或空假，值等递左右
+```
+```
+public boolean isSymmetric(TreeNode root) {
+    return dfs(root, root);
+}
+
+public boolean dfs(TreeNode t1, TreeNode t2) {
+    if (t1 == null && t2 == null) return true;
+    if (t1 == null || t2 == null) return false;
+    return (t1.val == t2.val)
+        && dfs(t1.right, t2.left)
+        && dfs(t1.left, t2.right);
+}
+```
+
 345. Reverse Vowels of a String
 ```
 public String reverseVowels(String s) {
