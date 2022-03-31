@@ -68,6 +68,35 @@ public boolean dfs(TreeNode t1, TreeNode t2) {
 }
 ```
 
+226. Invert Binary Tree 翻转二叉树
+
+```
+二叉树根节点，翻转二叉树，返根节点
+```
+```
+root of binary tree, invert tree, return its root.
+
+Input: root = [4,2,7,1,3,6,9]
+Output: [4,7,2,9,6,3,1]
+```
+```
+递根；
+节空返空，左递右，右递左，返节
+```
+```
+public TreeNode invertTree(TreeNode root) {
+    return dfs(root);
+}
+public TreeNode dfs(TreeNode node) {
+    if (node == null) {return null;}
+    TreeNode right = dfs(node.right);
+    TreeNode left = dfs(node.left);
+    node.left = right;
+    node.right = left;
+    return node;
+}
+```
+
 345. Reverse Vowels of a String
 ```
 public String reverseVowels(String s) {
