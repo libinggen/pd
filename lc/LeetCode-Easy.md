@@ -116,6 +116,47 @@ public String reverseVowels(String s) {
 }
 ```
 
+463. Island Perimeter 岛屿周长
+
+```
+二维网格，1陆0水，格水平垂直相连，水包围，只一岛，岛无湖，格边1，网长方，宽高不过100，岛周长。
+```
+```
+row x col grid map, grid[i][j] = 1 land, grid[i][j] = 0 water.
+
+Grid cells connected horizontally/vertically (not diagonally). grid surrounded water, one island (one or more connected land cells).
+
+island doesn't have "lakes", water inside isn't connected to water around island. One cell square with side length 1. grid rectangular, width and height don't exceed 100. Determine perimeter of island.
+
+Input: grid = [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]
+Output: 16
+```
+```
+遍行，遍列，岛递行列；
+超界加，水加，标过0，标2，递上下左右
+```
+```
+public int islandPerimeter(int[][] grid) {
+    for (int r = 0; r < grid.length; r++) {
+        for (int c = 0; c < grid[0].length; c++) {
+            if (grid[r][c] == 1) {return dfs(grid, r, c);}
+        }
+    }
+    return 0;
+}
+
+int dfs(int[][] grid, int r, int c) {
+    if (!(0 <= r && r < grid.length && 0 <= c && c < grid[0].length)) {return 1;}
+    if (grid[r][c] == 0) {return 1;}
+    if (grid[r][c] != 1) {return 0;}
+    grid[r][c] = 2;
+    return dfs(grid, r - 1, c)
+        + dfs(grid, r + 1, c)
+        + dfs(grid, r, c - 1)
+        + dfs(grid, r, c + 1);
+}
+```
+
 543. Diameter of Binary Tree 二叉树直径
 
 ```
