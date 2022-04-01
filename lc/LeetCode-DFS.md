@@ -101,6 +101,44 @@ int dfs(int[][] grid, int r, int c) {
 }
 ```
 
+733. Flood Fill 图像渲染
+
+```
+m x n integer grid image, image[i][j] represents pixel value of image.
+three integers sr, sc, and newColor. perform flood fill on image starting from pixel image[sr][sc].
+consider starting pixel, plus any pixels connected 4-directionally to starting pixel of the same color as starting pixel, plus any pixels connected 4-directionally to those pixels with same color. Replace color of all of aforementioned pixels with newColor.
+Return modified image flood fill.
+
+Input: image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, newColor = 2
+Output: [[2,2,2],[2,2,0],[2,0,1]]
+Explanation: From the center of the image with position (sr, sc) = (1, 1) (i.e., the red pixel), all pixels connected by a path of the same color as the starting pixel (i.e., the blue pixels) are colored with the new color.
+Note the bottom corner is not colored 2, because it is not 4-directionally connected to the starting pixel.
+```
+```
+二维网格图，image[i][j]像素值颜色，始点sr、sc，新色newColor，始点上下左右同值点改为newColor。
+```
+```DFS```
+```
+存始值，非新递始；
+同始值，改新值，递上下左右；
+```
+```
+public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+    int color = image[sr][sc];
+    if (color != newColor) dfs(image, sr, sc, color, newColor);
+    return image;
+}
+public void dfs(int[][] image, int r, int c, int color, int newColor) {
+    if (image[r][c] == color) {
+        image[r][c] = newColor;
+        if (r >= 1) dfs(image, r-1, c, color, newColor);
+        if (c >= 1) dfs(image, r, c-1, color, newColor);
+        if (r+1 < image.length) dfs(image, r+1, c, color, newColor);
+        if (c+1 < image[0].length) dfs(image, r, c+1, color, newColor);
+    }
+}
+```
+
 ## Medium
 
 
