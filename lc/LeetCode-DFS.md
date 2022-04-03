@@ -31,6 +31,34 @@ public boolean dfs(TreeNode t1, TreeNode t2) {
 }
 ```
 
+104. Maximum Depth of Binary Tree 二叉树最大深度
+
+```
+root of binary tree, return maximum depth.
+binary tree's maximum depth is number of nodes along longest path from root node down to farthest leaf node.
+
+Input: root = [3,9,20,null,null,15,7]
+Output: 3
+```
+```
+二叉树根节点，找最大深度。二叉树深度为根节点到最远叶子节点的最长路径节点数。叶子节点是没有子节点。
+```
+```DFS```
+```
+空返0，递左，递右，大左右加1
+```
+```
+public int maxDepth(TreeNode root) {
+    if (root == null) {
+        return 0;
+    } else {
+        int leftHeight = maxDepth(root.left);
+        int rightHeight = maxDepth(root.right);
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+}
+```
+
 226. Invert Binary Tree 翻转二叉树
 
 ```
