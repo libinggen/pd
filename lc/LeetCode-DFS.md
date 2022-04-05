@@ -2,17 +2,50 @@
 
 ## Easy
 
-101. Symmetric Tree 对称二叉树
+100. Same Tree 相同树
 
 ```
-二叉树根节点，轴对称
+roots of two binary trees p and q, they are the same or not.
+structurally identical, and nodes have same value.
+
+Input: p = [1,2], q = [1,null,2]
+Output: false
 ```
+```
+两棵二叉树根节点，检验是否相同。结构相同，节点同值。
+```
+
+```DFS```
+```
+空且空真，空或空假，返递左且递右
+```
+```
+public boolean isSameTree(TreeNode p, TreeNode q) {
+    return dfs(p, q);
+}
+
+public boolean dfs(TreeNode p, TreeNode q) {
+    if (p == null && q == null) {return true;}
+    else if (p == null || q == null) {return false;}
+    else if (p.val != q.val) {return false;}
+    else {return dfs(p.left, q.left) && dfs(p.right, q.right);}
+}
+```
+
+101. Symmetric Tree 对称二叉树
+
 ```
 root of binary tree, check mirror of itself (symmetric around center).
 
 Input: root = [1,2,2,3,4,4,3]
 Output: true
 ```
+
+```
+二叉树根节点，轴对称
+```
+
+```DFS```
 ```
 递根根；
 空且空真，空或空假，值等递左右
@@ -72,7 +105,7 @@ Output: [4,7,2,9,6,3,1]
 ```
 ```
 递根；
-节空返空，左递右，右递左，返节
+节空返空，左递右，右递左，左右换，返节；
 ```
 ```
 public TreeNode invertTree(TreeNode root) {
@@ -91,9 +124,6 @@ public TreeNode dfs(TreeNode node) {
 463. Island Perimeter 岛屿周长
 
 ```
-二维网格，1陆0水，格水平垂直相连，水包围，只一岛，岛无湖，格边1，网长方，宽高不过100，岛周长。
-```
-```
 row x col grid map, grid[i][j] = 1 land, grid[i][j] = 0 water.
 
 Grid cells connected horizontally/vertically (not diagonally). grid surrounded water, one island (one or more connected land cells).
@@ -103,6 +133,12 @@ island doesn't have "lakes", water inside isn't connected to water around island
 Input: grid = [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]
 Output: 16
 ```
+
+```
+二维网格，1陆0水，格水平垂直相连，水包围，只一岛，岛无湖，格边1，网长方，宽高不过100，岛周长。
+```
+
+```DFS```
 ```
 遍行，遍列，岛递行列；
 超界加，水加，标过0，标2，递上下左右

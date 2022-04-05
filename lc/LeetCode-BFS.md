@@ -2,6 +2,96 @@
 
 ## Easy
 
+100. Same Tree 相同树
+
+```
+roots of two binary trees p and q, they are the same or not.
+structurally identical, and nodes have same value.
+
+Input: p = [1,2], q = [1,null,2]
+Output: false
+```
+```
+两棵二叉树根节点，检验是否相同。结构相同，节点同值。
+```
+
+```BFS```
+```
+空且空真，空或空假，队加节；
+队非空，队弹节，不同值假，左右不同空假；
+空且空真
+```
+```
+public boolean isSameTree(TreeNode p, TreeNode q) {
+    if (p == null && q == null) {return true;}
+    else if (p == null || q == null) {return false;}
+
+    Queue<TreeNode> queP = new LinkedList<TreeNode>();
+    Queue<TreeNode> queQ = new LinkedList<TreeNode>();
+    queP.offer(p);
+    queQ.offer(q);
+
+    while (!queP.isEmpty() && !queQ.isEmpty()) {
+        TreeNode nodeP = queP.poll();
+        TreeNode nodeQ = queQ.poll();
+        if (nodeP.val != nodeQ.val) {return false;}
+
+        TreeNode leftP = nodeP.left, rightP = nodeP.right;
+        TreeNode leftQ = nodeQ.left, rightQ = nodeQ.right;
+        if (leftP == null ^ leftQ == null) {return false;}
+        if (rightP == null ^ rightQ == null) {return false;}
+        if (leftP != null) {queP.offer(leftP);}
+        if (rightP != null) {queP.offer(rightP);}
+        if (leftQ != null) {queQ.offer(leftQ);}
+        if (rightQ != null) {queQ.offer(rightQ);}
+    }
+    return queP.isEmpty() && queQ.isEmpty();
+}
+```
+
+101. Symmetric Tree 对称二叉树
+
+```
+root of binary tree, check mirror of itself (symmetric around center).
+
+Input: root = [1,2,2,3,4,4,3]
+Output: true
+```
+```
+二叉树根节点，轴对称
+```
+
+```BFS```
+```
+队加左右，队非空；
+队弹左右，空且空过，空或空、值不等假，队加左右、队加右左；
+返真；
+```
+```
+public boolean isSymmetric(TreeNode root) {
+    return bfs(root, root);
+}
+
+public boolean bfs(TreeNode u, TreeNode v) {
+    Queue<TreeNode> q = new LinkedList<TreeNode>();
+    q.offer(u);
+    q.offer(v);
+    while (!q.isEmpty()) {
+        u = q.poll();
+        v = q.poll();
+        if (u == null && v == null) {continue;}
+        if ((u == null || v == null) || (u.val != v.val)) {return false;}
+
+        q.offer(u.left);
+        q.offer(v.right);
+
+        q.offer(u.right);
+        q.offer(v.left);
+    }
+    return true;
+}
+```
+
 104. Maximum Depth of Binary Tree 二叉树最大深度
 
 ```
@@ -38,6 +128,88 @@ public int maxDepth(TreeNode root) {
     }
     return ans;
 }
+```
+
+226. Invert Binary Tree 翻转二叉树
+
+```
+root of binary tree, invert tree, return its root.
+
+Input: root = [4,2,7,1,3,6,9]
+Output: [4,7,2,9,6,3,1]
+```
+```
+二叉树根节点，翻转二叉树，返根节点
+```
+
+```BFS```
+```
+根空返，队加根，队非空；
+队弹节，左右换，非空队加左右；
+```
+```
+public TreeNode invertTree(TreeNode root) {
+    if (root == null) return null;
+    Queue<TreeNode> queue = new LinkedList<TreeNode>();
+    queue.add(root);
+    while (!queue.isEmpty()) {
+        TreeNode current = queue.poll();
+        TreeNode temp = current.left;
+        current.left = current.right;
+        current.right = temp;
+        if (current.left != null) queue.add(current.left);
+        if (current.right != null) queue.add(current.right);
+    }
+    return root;
+}
+```
+
+463. Island Perimeter 岛屿周长
+
+```
+row x col grid map, grid[i][j] = 1 land, grid[i][j] = 0 water.
+
+Grid cells connected horizontally/vertically (not diagonally). grid surrounded water, one island (one or more connected land cells).
+
+island doesn't have "lakes", water inside isn't connected to water around island. One cell square with side length 1. grid rectangular, width and height don't exceed 100. Determine perimeter of island.
+
+Input: grid = [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]
+Output: 16
+```
+```
+二维网格，1陆0水，格水平垂直相连，水包围，只一岛，岛无湖，格边1，网长方，宽高不过100，岛周长。
+```
+
+```BFS```
+```
+遍行，遍列，岛；
+上右下左，超界、水加，加总，返总；
+```
+```
+static int[] dx = {0, 1, 0, -1};
+static int[] dy = {1, 0, -1, 0};
+
+public int islandPerimeter(int[][] grid) {
+    int n = grid.length, m = grid[0].length;
+    int ans = 0;
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            if (grid[i][j] == 1) {
+                int cnt = 0;
+                for (int k = 0; k < 4; ++k) {
+                    int tx = i + dx[k];
+                    int ty = j + dy[k];
+                    if (tx < 0 || tx >= n || ty < 0 || ty >= m || grid[tx][ty] == 0) {
+                        cnt += 1;
+                    }
+                }
+                ans += cnt;
+            }
+        }
+    }
+    return ans;
+}
+```
 
 733. Flood Fill 图像渲染
 
