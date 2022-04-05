@@ -211,6 +211,46 @@ public int islandPerimeter(int[][] grid) {
 }
 ```
 
+617. Merge Two Binary Trees 合并二叉树
+
+```
+two binary trees root1 and root2.
+put one of them to cover other, some nodes of two trees are overlapped while others are not. merge two trees into a new binary tree. merge rule is if two nodes overlap, then sum node values up as new value of merged node. Otherwise, NOT null node will be used as node of new tree.
+Return merged tree.
+merging process must start from the root nodes of both trees.
+
+Input: root1 = [1,3,2,5], root2 = [2,1,3,null,4,null,7]
+Output: [3,4,5,5,4,null,7]
+```
+```
+两二叉树，合并新树，节点重叠，值相加，不空新节，返回新树。合并从根开始。
+```
+
+```BFS```
+```
+1空返2，2空返1，队加12；
+队非空，队弹12，1加2，12左非空队加12左，1左空2左，12右非空队加12右，1右空2右；
+```
+```
+public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+	if(t1==null) {return t2;}
+    if(t2==null) {return t1;}
+	Queue<TreeNode> queue = new LinkedList<TreeNode>();
+	queue.add(t1);
+	queue.add(t2);
+	while(!queue.isEmpty()) {
+		TreeNode n1 = queue.poll();
+		TreeNode n2 = queue.poll();
+		n1.val += n2.val;
+		if(n1.left!=null && n2.left!=null){queue.add(n1.left);queue.add(n2.left);}
+		else if(n1.left==null) {n1.left = n2.left;}
+		if(n1.right!=null && n2.right!=null) {queue.add(n1.right);queue.add(n2.right);}
+		else if(n1.right==null) {r1.right = n2.right;}
+	}
+	return t1;
+}
+```
+
 733. Flood Fill 图像渲染
 
 ```

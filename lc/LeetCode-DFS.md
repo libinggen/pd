@@ -165,6 +165,39 @@ int dfs(int[][] grid, int r, int c) {
 }
 ```
 
+617. Merge Two Binary Trees 合并二叉树
+
+```
+two binary trees root1 and root2.
+put one of them to cover other, some nodes of two trees are overlapped while others are not. merge two trees into a new binary tree. merge rule is if two nodes overlap, then sum node values up as new value of merged node. Otherwise, NOT null node will be used as node of new tree.
+Return merged tree.
+merging process must start from the root nodes of both trees.
+
+Input: root1 = [1,3,2,5], root2 = [2,1,3,null,4,null,7]
+Output: [3,4,5,5,4,null,7]
+```
+```
+两二叉树，合并新树，节点重叠，值相加，不空新节，返回新树。合并从根开始。
+```
+```DFS```
+```
+1空返2，2空返1，1值加2值；
+1左递左左，1右递右右，返1；
+```
+```
+public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+    return dfs(t1, t2);
+}n2
+public TreeNode dfs(TreeNode n1, TreeNode n2) {
+    if (n1 == null)return n2;
+    if (n2 == null)return n1;
+    n1.val += n2.val;
+    n1.left = dfs(n1.left, n2.left);
+    n1.right = dfs(n1.right, n2.right);
+    return n1;
+}
+```
+
 733. Flood Fill 图像渲染
 
 ```
