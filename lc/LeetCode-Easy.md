@@ -335,6 +335,36 @@ public TreeNode dfs(TreeNode node, int pVal, int qVal) {
 }
 ```
 
+270. Closest Binary Search Tree Value 最接近的二叉搜索树值
+
+```
+root of binary search tree and target value, return value in BST that is closest to target.
+
+Input: root = [4,2,5,1,3], target = 3.714286
+Output: 4
+```
+```
+二叉搜索树，目标值，返回最接近目标的二叉搜索树值。
+```
+
+```DFS```
+```
+节空返值，节近节值，节小递右，节大递左
+```
+```
+public int closestValue(TreeNode root, double target) {
+    return dfs(root, target, root.val);
+}
+    
+private int dfs(TreeNode node, double target, int val) {
+    if (node == null) return val;
+    if (Math.abs(node.val - target) < Math.abs(val - target)) val = node.val;
+    if (node.val < target) val = dfs(node.right, target, val);
+    else if (node.val > target) val = dfs(node.left, target, val);
+    return val;
+}
+```
+
 344. Reverse String 反转字符串
 
 ```
