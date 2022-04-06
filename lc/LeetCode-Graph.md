@@ -43,6 +43,87 @@ public int findJudge(int N, int[][] trust) {
 }
 ```
 
+1971. Find if Path Exists in Graph 寻找图中是否存在路径
+
+```
+bi-directional graph with n vertices, where each vertex is labeled from 0 to n - 1 (inclusive). edges in graph are represented as 2D integer array edges, where each edges[i] = [ui, vi] denotes bi-directional edge between vertex ui and vertex vi. Every vertex pair is connected by at most one edge, and no vertex has an edge to itself.
+determine if there is valid path that exists from vertex source to vertex destination.
+edges and integers n, source, and destination, return true if there is valid path from source to destination, or false otherwise.
+
+Input: n = 3, edges = [[0,1],[1,2],[2,0]], source = 0, destination = 2
+Output: true
+Explanation: There are two paths from vertex 0 to vertex 2:
+- 0 → 1 → 2
+- 0 → 2
+```
+```
+n顶点双向图，顶点标从0到n-1。二维整数边数组，i边顶点ui、vi双向边。顶点对一边，无自连边。从始到终有效路径。边数组、整数n、始终点，有返真，无返假。
+```
+
+```
+置假，始终等真；
+遍边，节邻、邻节双向顶点，递始终；
+始访真找真返，始访真，遍始邻，邻终等真，未访递邻；
+```
+```
+boolean found;
+public boolean validPath(int n, int[][] edges, int start, int end) {
+    found = false;
+
+    if(start == end) return true;
+
+    Map<Integer,List<Integer>> graph = new HashMap();
+    boolean[] visited = new boolean[n];
+
+    for(int i = 0 ; i < n ; i++){
+        graph.put(i, new ArrayList());
+    }
+    for(int[] edge : edges){
+       graph.get(edge[0]).add(edge[1]);
+       graph.get(edge[1]).add(edge[0]);
+    }
+
+    dfs(graph,visited,start,end);
+   
+    return found;
+}
+
+private void dfs(Map<Integer,List<Integer>> graph,boolean[] visited, int start, int end){
+    if(visited[start] || found) return;
+    visited[start] = true;
+    for(int nei : graph.get(start)){
+        if(nei == end){found = true;break;}
+        if(!visited[nei]) dfs(graph, visited, nei, end);
+    }
+}
+```
+
+```
+始终等真，路组假，始路真，有下真；
+终路假且有下真，有下假，遍边，顶1真、顶2假有下真顶2真，顶2真有下真顶1真；
+```
+```
+public boolean validPath(int n, int[][] edges, int source, int destination) {
+    if(source == destination) return true;
+
+    boolean[] path = new boolean[n];
+    path[source] = true;
+    boolean hasNext = true;
+
+    while(!path[destination] && hasNext) {
+        hasNext = false;
+        for(int[] edge : edges) {
+            if(path[edge[0]]) {
+                if(!path[edge[1]]) {hasNext = true;path[edge[1]] = true;}
+            }
+            else if(path[edge[1]]) {hasNext = true;path[edge[0]] = true;}
+        }
+    }
+
+    return path[destination];
+}
+```
+
 ## Medium
 
 
