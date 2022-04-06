@@ -593,3 +593,37 @@ public int rangeSumBST(TreeNode root, int low, int high) {
     return sum;
 }
 ```
+
+1022. Sum of Root To Leaf Binary Numbers 从根到叶的二进制数和
+
+```
+root of binary tree where each node has value 0 or 1. Each root-to-leaf path represents binary number starting with most significant bit.
+path is 0 -> 1 -> 1 -> 0 -> 1, represent 01101 in binary, which is 13.
+all leaves in the tree, consider numbers represented by path from root to leaf. Return sum of numbers.
+answer fits in 32-bits integer.
+
+Input: root = [1,0,1,0,1,0,1]
+Output: 22
+Explanation: (100) + (101) + (110) + (111) = 4 + 5 + 6 + 7 = 22
+```
+```
+二叉树，结点值0或1，从根到叶路径代表从最高有效位开始二进数，每叶根路径数字，返回和。32位整数。
+```
+
+```DFS```
+```
+递根0；
+节空返0，值2加节值，左等右返值，返递左值加递右值；
+```
+```
+public int sumRootToLeaf(TreeNode root) {
+    return dfs(root, 0);
+}
+
+public int dfs(TreeNode node, int val) {
+    if (node == null) return 0;
+    val = val * 2 + node.val;
+    if (node.left == node.right) return val;
+    return dfs(node.left, val) + dfs(node.right, val);
+}
+```
