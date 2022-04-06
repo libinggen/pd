@@ -303,6 +303,38 @@ public TreeNode invertTree(TreeNode root) {
 }
 ```
 
+235. Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先
+
+```
+binary search tree (BST), find lowest common ancestor (LCA) of two nodes in BST.
+
+According to definition of LCA on Wikipedia: “lowest common ancestor is defined between two nodes p and q as lowest node in T that has both p and q as descendants (node to be a descendant of itself).”
+
+Input: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
+Output: 6
+Explanation: The LCA of nodes 2 and 8 is 6.
+```
+```
+二叉搜索树，两个节点最近公共祖先。最近公共祖先，两节点都是子节点的最近点。
+```
+
+```DFS```
+```
+节值大返递左，节值小返递右，返节
+```
+```
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    return dfs(root, p.val, q.val);
+}
+
+public TreeNode dfs(TreeNode node, int pVal, int qVal) {
+    int nodeVal = node.val;
+    if (pVal < nodeVal && qVal < nodeVal) {return dfs(node.left, pVal, qVal);}
+    if (pVal > nodeVal && qVal > nodeVal) {return dfs(node.right, pVal, qVal);}
+    return node;
+}
+```
+
 344. Reverse String 反转字符串
 
 ```
