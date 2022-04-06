@@ -39,6 +39,38 @@ public int maxSubArray(int[] nums) {
 }
 ```
 
+94. Binary Tree Inorder Traversal 二叉树中序遍历
+
+```
+root of binary tree, return inorder traversal of nodes' values.
+
+Input: root = [1,null,2,3]
+Output: [1,3,2]
+```
+```
+二叉树根节点，中序遍历。左节右。
+```
+
+```DFS```
+```
+递根；
+节空返，递左，加节值，递右；
+```
+```
+public List<Integer> inorderTraversal(TreeNode root) {
+    List<Integer> res = new ArrayList<>();
+    dfs(root, res);
+    return res;
+}
+
+public void dfs(TreeNode node, List<Integer> res) {
+    if (node == null) return;
+    dfs(node.left, res);
+    res.add(node.val);
+    dfs(node.right, res);
+}
+```
+
 100. Same Tree 相同树
 
 ```

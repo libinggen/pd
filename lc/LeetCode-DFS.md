@@ -2,6 +2,38 @@
 
 ## Easy
 
+94. Binary Tree Inorder Traversal 二叉树中序遍历
+
+```
+root of binary tree, return inorder traversal of nodes' values.
+
+Input: root = [1,null,2,3]
+Output: [1,3,2]
+```
+```
+二叉树根节点，中序遍历。左节右。
+```
+
+```DFS```
+```
+递根；
+节空返，递左，加节值，递右；
+```
+```
+public List<Integer> inorderTraversal(TreeNode root) {
+    List<Integer> res = new ArrayList<>();
+    dfs(root, res);
+    return res;
+}
+
+public void dfs(TreeNode node, List<Integer> res) {
+    if (node == null) return;
+    dfs(node.left, res);
+    res.add(node.val);
+    dfs(node.right, res);
+}
+```
+
 100. Same Tree 相同树
 
 ```
@@ -233,6 +265,40 @@ public void dfs(int[][] image, int r, int c, int color, int newColor) {
         if (r+1 < image.length) dfs(image, r+1, c, color, newColor);
         if (c+1 < image[0].length) dfs(image, r, c+1, color, newColor);
     }
+}
+```
+
+1022. Sum of Root To Leaf Binary Numbers 从根到叶的二进制数和
+
+```
+root of binary tree where each node has value 0 or 1. Each root-to-leaf path represents binary number starting with most significant bit.
+path is 0 -> 1 -> 1 -> 0 -> 1, represent 01101 in binary, which is 13.
+all leaves in the tree, consider numbers represented by path from root to leaf. Return sum of numbers.
+answer fits in 32-bits integer.
+
+Input: root = [1,0,1,0,1,0,1]
+Output: 22
+Explanation: (100) + (101) + (110) + (111) = 4 + 5 + 6 + 7 = 22
+```
+```
+二叉树，结点值0或1，从根到叶路径代表从最高有效位开始二进数，每叶根路径数字，返回和。32位整数。
+```
+
+```DFS```
+```
+递根0；
+节空返0，值2加节值，左等右返值，返递左值加递右值；
+```
+```
+public int sumRootToLeaf(TreeNode root) {
+    return dfs(root, 0);
+}
+
+public int dfs(TreeNode node, int val) {
+    if (node == null) return 0;
+    val = val * 2 + node.val;
+    if (node.left == node.right) return val;
+    return dfs(node.left, val) + dfs(node.right, val);
 }
 ```
 
