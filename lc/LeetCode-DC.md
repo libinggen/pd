@@ -34,6 +34,62 @@ public int maxSubArray(int[] nums) {
 }
 ```
 
+169. Majority Element 多数元素
+
+```
+array nums of size n, return majority element.
+majority element is element that appears more than ⌊n / 2⌋ times. assume that majority element always exists in array.
+
+Input: nums = [2,2,1,1,1,2,2]
+Output: 2
+```
+```
+大小为n数组，找多数元素。多数元素，出现次数大于n/2元素。
+```
+
+```DC```
+```
+低高同返低数，取中、递分左右，左右同返左；
+左计数左，右计数右，遍组，同数加1，返计；
+左计大返左，返右；
+```
+```
+public int majorityElement(int[] nums) {
+    return dc(nums, 0, nums.length - 1);
+}
+
+private int dc(int[] nums, int lo, int hi) {
+    if (lo == hi) {return nums[lo];}
+
+    int mid = (hi - lo) / 2 + lo;
+    int left = dc(nums, lo, mid);
+    int right = dc(nums, mid + 1, hi);
+
+    if (left == right) {return left;}
+    int leftCount = cr(nums, left, lo, hi);
+    int rightCount = cr(nums, right, lo, hi);
+
+    if(leftCount > rightCount) return left;
+    return right;
+}
+
+private int cr(int[] nums, int num, int lo, int hi) {
+    int count = 0;
+    for (int i = lo; i <= hi; i++) {
+        if (nums[i] == num) {count++;}
+    }
+    return count;
+}
+```
+
+```Sorting```
+```
+public int majorityElement(int[] nums) {
+    Arrays.sort(nums);
+    return nums[nums.length / 2];
+}
+```
+
 ## Medium
 
 
