@@ -43,6 +43,45 @@ public int findJudge(int N, int[][] trust) {
 }
 ```
 
+1791. Find Center of Star Graph 找出星型图的中心节点
+
+```
+undirected star graph consisting of n nodes labeled from 1 to n. star graph is graph where there is one center node and exactly n - 1 edges that connect center node with every other node.
+2D integer array edges where each edges[i] = [ui, vi] indicates that there is edge between nodes ui and vi. Return center of star graph.
+
+Input: edges = [[1,2],[2,3],[4,2]]
+Output: 2
+Explanation: As shown in the figure above, node 2 is connected to every other node, so 2 is the center.
+```
+```
+无向星型图，节点1到n。星型图1中心节点，有n-1边连其它节点。二维整数边数组，i边顶点ui、vi连边。返回星型图中心节点。
+```
+```
+1等返1，返2
+```
+```
+public int findCenter(int[][] edges) {
+    if(edges[0][0] == edges[1][0] || edges[0][0] == edges[1][1]) return edges[0][0];
+    return edges[0][1];
+}
+```
+```
+遍边，1顶加度、2顶加度，遍边n-1度边返顶
+```
+```
+public int findCenter(int[][] edges) {
+    int n = edges.length + 1;
+    int[] degrees = new int[n + 1];
+    for (int[] edge : edges) {
+        degrees[edge[0]]++;
+        degrees[edge[1]]++;
+    }
+    for (int i = 1; ; i++) {
+        if (degrees[i] == n - 1) {return i;}
+    }
+}
+```
+
 1971. Find if Path Exists in Graph 寻找图中是否存在路径
 
 ```
