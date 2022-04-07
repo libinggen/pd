@@ -56,6 +56,8 @@ Explanation: As shown in the figure above, node 2 is connected to every other no
 ```
 无向星型图，节点1到n。星型图1中心节点，有n-1边连其它节点。二维整数边数组，i边顶点ui、vi连边。返回星型图中心节点。
 ```
+
+```Graph```
 ```
 1等返1，返2
 ```
@@ -99,6 +101,7 @@ Explanation: There are two paths from vertex 0 to vertex 2:
 n顶点双向图，顶点标从0到n-1。二维整数边数组，i边顶点ui、vi双向边。顶点对一边，无自连边。从始到终有效路径。边数组、整数n、始终点，有返真，无返假。
 ```
 
+```Graph```
 ```
 置假，始终等真；
 遍边，节邻、邻节双向顶点，递始终；
