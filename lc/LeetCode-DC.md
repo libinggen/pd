@@ -34,6 +34,41 @@ public int maxSubArray(int[] nums) {
 }
 ```
 
+108. Convert Sorted Array to Binary Search Tree 有序数组转二叉搜索树
+
+```
+integer array nums where elements are sorted in ascending order, convert to height-balanced binary search tree.
+height-balanced binary tree is binary tree in which depth of two subtrees of every node never differs by more than one.
+
+Input: nums = [-10,-3,0,5,9]
+Output: [0,-3,9,-10,null,5]
+Explanation: [0,-10,5,null,-3,null,9] is also accepted
+```
+```
+整数数组，元素按升序排列，转为高度平衡二叉搜索树。高度平衡二叉树，每个节点左右子树高度差绝对值不超过1。
+```
+
+```DC```
+```
+左大右返空，中左根，左递左，右递右，返根
+```
+```
+public TreeNode sortedArrayToBST(int[] nums) {
+    return dc(nums, 0, nums.length - 1);
+}
+
+public TreeNode dc(int[] nums, int left, int right) {
+    if (left > right) {return null;}
+
+    int mid = (left + right) / 2;
+
+    TreeNode root = new TreeNode(nums[mid]);
+    root.left = dc(nums, left, mid - 1);
+    root.right = dc(nums, mid + 1, right);
+    return root;
+}
+```
+
 169. Majority Element 多数元素
 
 ```
