@@ -158,6 +158,20 @@ public int reverseBits(int n) {
 }
 ```
 
+```
+遍n，倒序添加翻转结果，逻辑右移一位
+```
+```
+public int reverseBits(int n) {
+    int rev = 0;
+    for (int i = 0; i < 32 && n != 0; ++i) {
+        rev |= (n & 1) << (31 - i);
+        n >>>= 1;
+    }
+    return rev;
+}
+```
+
 ## Medium
 
 
