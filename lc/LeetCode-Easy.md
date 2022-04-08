@@ -359,6 +359,39 @@ public int majorityElement(int[] nums) {
 }
 ```
 
+190. Reverse Bits 颠倒二进制位
+
+```
+Reverse bits of 32 bits unsigned integer.
+Java, there is no unsigned integer type. both input and output as signed integer type. integer's internal binary is same, whether it is signed or unsigned.
+In Java, compiler represents signed integers using 2's complement notation. input represents signed integer -3 and output represents signed integer -1073741825.
+
+Input: n = 00000010100101000001111010011100
+Output:    964176192 (00111001011110000010100101000000)
+Explanation: The input binary string 00000010100101000001111010011100 represents the unsigned integer 43261596, so return 964176192 which its binary representation is 00111001011110000010100101000000.
+```
+```
+颠倒32位无符号整数二进制位。Java没有无符号整数类型，输入输出为有符号整数类型，有无符号整数内部二进制形式相同。Java编译器二进制补码表示有符号整数
+```
+```
+掩码1-5555，2-3333，4-0f0f,8-00ff；
+右移并掩或并掩左移，返右移或左移；
+```
+```
+private static final int M1 = 0x55555555; // 01010101010101010101010101010101
+private static final int M2 = 0x33333333; // 00110011001100110011001100110011
+private static final int M4 = 0x0f0f0f0f; // 00001111000011110000111100001111
+private static final int M8 = 0x00ff00ff; // 00000000111111110000000011111111
+
+public int reverseBits(int n) {
+    n = n >>> 1 & M1 | (n & M1) << 1;
+    n = n >>> 2 & M2 | (n & M2) << 2;
+    n = n >>> 4 & M4 | (n & M4) << 4;
+    n = n >>> 8 & M8 | (n & M8) << 8;
+    return n >>> 16 | n << 16;
+}
+```
+
 226. Invert Binary Tree 翻转二叉树
 
 ```
