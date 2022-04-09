@@ -303,6 +303,92 @@ public TreeNode dc(int[] nums, int left, int right) {
 }
 ```
 
+125. Valid Palindrome 验证回文串
+
+```
+phrase is palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads same forward and backward. Alphanumeric characters include letters and numbers.
+string s, return true if it is palindrome, or false otherwise.
+
+Input: s = "A man, a plan, a canal: Panama"
+Output: true
+Explanation: "amanaplanacanalpanama" is a palindrome.
+```
+```
+字符串，验证回文串。字母和数字，忽略大小写。
+```
+
+```
+遍串，字母数字加小，反串，返原反等
+```
+```
+public boolean isPalindrome(String s) {
+    StringBuffer sgood = new StringBuffer();
+    int length = s.length();
+    for (int i = 0; i < length; i++) {
+        char ch = s.charAt(i);
+        if (Character.isLetterOrDigit(ch)) {
+            sgood.append(Character.toLowerCase(ch));
+        }
+    }
+    StringBuffer sgood_rev = new StringBuffer(sgood).reverse();
+    return sgood.toString().equals(sgood_rev.toString());
+}
+```
+
+```Two Pointers```
+```
+遍串，字母数字加；
+遍串，左右小不等返假，左加右减，返真；
+```
+```
+public boolean isPalindrome(String s) {
+    StringBuffer sgood = new StringBuffer();
+    int length = s.length();
+    for (int i = 0; i < length; i++) {
+        char ch = s.charAt(i);
+        if (Character.isLetterOrDigit(ch)) {
+            sgood.append(Character.toLowerCase(ch));
+        }
+    }
+    int n = sgood.length();
+    int left = 0, right = n - 1;
+    while (left < right) {
+        if (Character.toLowerCase(sgood.charAt(left)) != Character.toLowerCase(sgood.charAt(right))) {
+            return false;
+        }
+        ++left;
+        --right;
+    }
+    return true;
+}
+```
+
+```
+遍串，非字母数字左加右减，左小右左右小不等返假，左加右减，返真
+```
+```
+public boolean isPalindrome(String s) {
+    int n = s.length();
+    int left = 0, right = n - 1;
+    while (left < right) {
+        while (left < right && !Character.isLetterOrDigit(s.charAt(left))) {
+            ++left;
+        }
+        while (left < right && !Character.isLetterOrDigit(s.charAt(right))) {
+            --right;
+        }
+        if (left < right) {
+            if (Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))) {
+                return false;
+            }
+            ++left;
+            --right;
+        }
+    }
+    return true;
+}
+```
+
 169. Majority Element 多数元素
 
 ```
@@ -725,6 +811,45 @@ public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
 		else if(n1.right==null) {r1.right = n2.right;}
 	}
 	return t1;
+}
+```
+
+680. Valid Palindrome II 验证回文符串II
+
+```
+string s, return true if s can be palindrome after deleting at most one character from it.
+
+Input: s = "abca"
+Output: true
+Explanation: You could delete the character 'c'.
+```
+```
+非空字符串，最多删除一个字符，是否回文字符串。
+```
+
+```Greedy```
+```
+遍串，低高不等返验高减一或验低加一，低加、高减，返真；
+遍串低加高减，低高不等返假，返真；
+```
+```
+public boolean validPalindrome(String s) {
+    int low = 0, high = s.length() - 1;
+    while (low < high) {
+        char clow = s.charAt(low), chigh = s.charAt(high);
+        if (clow != chigh) {return validPalindrome(s, low, high - 1) || validPalindrome(s, low + 1, high);}
+        ++low;
+        --high;
+    }
+    return true;
+}
+
+public boolean validPalindrome(String s, int low, int high) {
+    for (int i = low, j = high; i < j; ++i, --j) {
+        char ci = s.charAt(i), cj = s.charAt(j);
+        if (ci != cj) {return false;}
+    }
+    return true;
 }
 ```
 
