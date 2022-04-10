@@ -81,6 +81,43 @@ public boolean validPalindrome(String s, int low, int high) {
 }
 ```
 
+1217. Minimum Cost to Move Chips to The Same Position 最小代价移动筹码到同一位置
+
+```
+n chips, where position of ith chip is position[i].
+move all chips to same position. In one step, change position of ith chip from position[i] to:
+position[i] + 2 or position[i] - 2 with cost = 0.
+position[i] + 1 or position[i] - 1 with cost = 1.
+Return minimum cost needed to move all chips to same position.
+
+Input: position = [1,2,3]
+Output: 1
+Explanation: First step: Move the chip at position 3 to position 1 with cost = 0.
+Second step: Move the chip at position 2 to position 1 with cost = 1.
+Total cost is 1.
+```
+```
+n筹码，第i筹码位置position[i]，position[i]+2 -2 cost 0，position[i]+1 -1 cost 1，移动所有筹码最小代价。
+```
+
+```Greedy```
+```
+遍位，计奇、计偶，奇偶取小
+```
+```
+public int minCostToMoveChips(int[] position) {
+    int oddCnt = 0, evenCnt = 0;
+    for (int i = 0; i < position.length; i++) {
+        if (position[i] % 2 != 0) {
+            oddCnt++;
+        } else {
+            evenCnt++;
+        }
+    }
+    return Math.min(oddCnt, evenCnt);
+}
+```
+
 1710. Maximum Units on a Truck 卡车上的最大单元数
 
 ```
