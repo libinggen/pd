@@ -81,6 +81,56 @@ public boolean validPalindrome(String s, int low, int high) {
 }
 ```
 
+1710. Maximum Units on a Truck 卡车上的最大单元数
+
+```
+put some amount of boxes onto one truck. 2D array boxTypes, where boxTypes[i] = [numberOfBoxesi, numberOfUnitsPerBoxi]:
+numberOfBoxesi is number of boxes of type i.
+numberOfUnitsPerBoxi is number of units in each box of the type i.
+an integer truckSize, which is maximum number of boxes that can be put on truck. choose any boxes to put on truck as long as number of boxes does not exceed truckSize.
+Return maximum total number of units that can be put on truck.
+
+Input: boxTypes = [[1,3],[2,2],[3,1]], truckSize = 4
+Output: 8
+Explanation: There are:
+- 1 box of the first type that contains 3 units.
+- 2 boxes of the second type that contain 2 units each.
+- 3 boxes of the third type that contain 1 unit each.
+You can take all the boxes of the first and second types, and one box of the third type.
+The total number of units will be = (1 * 3) + (2 * 2) + (1 * 1) = 8.
+```
+```
+箱子装车，二维数组，boxTypes[i]，[numberOfBoxesi, numberOfUnitsPerBoxi]，i类箱数、每箱单元数。整数车载箱子最大数量，返车载单元最大数。
+```
+
+```
+单元排序，遍箱，单元数、箱数，标加一，车箱箱数取小，车箱减小，总加单元乘小，返总
+```
+
+```Greedy```
+```
+public int maximumUnits(int[][] boxTypes, int truckSize) {
+
+    Arrays.sort(boxTypes, (a,b) -> b[1] - a[1]);
+
+    int totalSize = 0;
+    int index = 0;
+
+    while(truckSize > 0 && index < boxTypes.length) {
+
+        int boxSize = boxTypes[index][1];
+        int boxCount = boxTypes[index][0];
+        index++;
+        int canFit = Math.min(boxCount, truckSize);
+        truckSize -= canFit;
+
+        totalSize = totalSize + (boxSize * canFit);
+    }
+
+    return totalSize;
+}
+```
+
 ## Medium
 
 
