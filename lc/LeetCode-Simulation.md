@@ -2,6 +2,37 @@
 
 ## Easy
 
+67. Add Binary 二进制求和
+
+```
+two binary strings a and b, return sum as binary string.
+
+Input: a = "11", b = "1"
+Output: "100"
+```
+```
+两个二进制字符串，返回和，二进制表示。输入非空字符串只含数字1和0。carry进位。
+```
+
+```Simulation```
+```
+遍串，ab进加减字0，标减，加余，得进，有进加1，反序字符
+```
+```
+public String addBinary(String a, String b) {
+    StringBuilder ans = new StringBuilder();
+    int i = a.length() - 1, j = b.length() - 1, carry = 0;
+    while (i >= 0 || j >= 0) {
+        if (i >= 0) {carry += a.charAt(i) - '0';i--;}
+        if (j >= 0) {carry += b.charAt(j) - '0';j--;}
+        ans.append(carry % 2);
+        carry /= 2;
+    }
+    if (carry > 0) {ans.append("1");}
+    return ans.reverse().toString();
+}
+```
+
 412. Fizz Buzz 烟花
 
 ```
