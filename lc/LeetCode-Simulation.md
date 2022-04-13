@@ -248,6 +248,67 @@ public String tictactoe(int[][] moves) {
 }
 ```
 
+1560. Most Visited Sector in a Circular Track 圆形赛道经过次数最多的扇区
+
+```
+integer n and integer array rounds. circular track which consists of n sectors labeled from 1 to n. marathon will be held on this track, marathon consists of m rounds. ith round starts at sector rounds[i - 1] and ends at sector rounds[i]. round 1 starts at sector rounds[0] and ends at sector rounds[1]
+Return array of most visited sectors sorted in ascending order.
+Notice that circulate track in ascending order of sector numbers in counter-clockwise direction.
+
+Input: n = 4, rounds = [1,3,1,2]
+Output: [1,2]
+Explanation: The marathon starts at sector 1. The order of the visited sectors is as follows:
+1 --> 2 --> 3 (end of round 1) --> 4 --> 1 (end of round 2) --> 2 (end of round 3 and the marathon)
+We can see that both sectors 1 and 2 are visited twice and they are the most visited sectors. Sectors 3 and 4 are visited only once.
+```
+```
+整数n，整数数组rounds。圆形赛道n个扇区，从1到n。比赛m个阶段，第i阶段从rounds[i-1]到rounds[i]扇区结束。第1阶段从rounds[0]到rounds[1]。数组形式返回经过次数最多的几个扇区，按扇区编号升序排列。赛道按扇区编号升序逆时针成圆。
+```
+
+```Simulation```
+```
+遍轮，始轮始大终0否轮终，终轮始大终0否轮终，遍轮始加1终、遍始加1轮终、大大大访加1，遍扇，大加i，返组
+```
+```
+public List<Integer> mostVisited(int n, int[] rounds) {
+    List<Integer> ans = new ArrayList<>();
+    int max = 1;
+    int[] visits = new int[n + 1];
+    visits[rounds[0]] = 1;
+
+    for (int i = 1; i < rounds.length; i++) {
+        int start = rounds[i - 1] > rounds[i] ? 0 : rounds[i],
+                end = rounds[i - 1] > rounds[i] ? n : rounds[i];
+        for (int j = rounds[i - 1] + 1; j <= end; j++){max = Math.max(max, ++visits[j]);}
+        for (int j = start + 1; j <= rounds[i]; j++){max = Math.max(max, ++visits[j]);}
+    }
+
+    for (int i = 1; i <= n; i++) {
+        if (visits[i] == max){ans.add(i);}
+    }
+
+    return ans;
+}
+```
+```
+始大等终、遍始终加i，始小终、遍1终加i、遍始扇加i，返组
+```
+```
+public List<Integer> mostVisited(int n, int[] rounds) {
+    List<Integer> ans = new ArrayList<>();
+    int start = rounds[0], end = rounds[rounds.length - 1];
+
+    if (start <= end) {
+        for (int i = start; i <= end; i++) {ans.add(i);}
+    } else {
+        for (int i = 1; i <= end; i++) {ans.add(i);}
+        for (int i = start; i <= n; i++) {ans.add(i);}
+    }
+
+    return ans;
+}
+```
+
 1920. Build Array from Permutation 基于排列构建数组
 
 ```
