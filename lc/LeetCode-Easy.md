@@ -40,7 +40,7 @@ Explanation: [4,-1,2,1] has the largest sum = 6.
 整数数组，找最大和连续子数组，至少一个元素，返回最大和。子数组连续。
 ```
 
-```DC```
+```DP```
 ```
 遍数，当数，现大当现，大大前现，返大
 ```
@@ -54,6 +54,75 @@ public int maxSubArray(int[] nums) {
         m = Math.max(m, c);
     }
     return m;
+}
+```
+
+```DC```
+```
+左大右返最小值，取中，遍左、加总、大左大前加总，遍右、加总、大右大前加总，中加大左右，递左，递右，大大合大左右半
+```
+```
+public int maxSubArray(int[] nums) {
+    return findMaxSubArray(0, nums.length - 1, nums);
+}
+
+private int findMaxSubArray(int left, int right, int[] numsArray) {
+    if (left > right) {return Integer.MIN_VALUE;}
+
+    int mid = Math.floorDiv(left + right, 2);
+    int curr = 0;
+    int maxLeftSum = 0;
+    int maxRightSum = 0;
+
+    for (int i = mid - 1; i >= left; i--) {
+        curr += numsArray[i];
+        maxLeftSum = Math.max(maxLeftSum, curr);
+    }
+    curr = 0;
+    for (int i = mid + 1; i <= right; i++) {
+        curr += numsArray[i];
+        maxRightSum = Math.max(maxRightSum, curr);
+    }
+
+    int maxCombinedSum = numsArray[mid] + maxLeftSum + maxRightSum;
+    int leftHalf = findMaxSubArray(left, mid - 1, numsArray);
+    int rightHalf = findMaxSubArray(mid + 1, right, numsArray);
+    return Math.max(maxCombinedSum, Math.max(leftHalf, rightHalf));
+}
+```
+
+```
+public class Status {
+    public int lSum, rSum, mSum, iSum;
+
+    public Status(int lSum, int rSum, int mSum, int iSum) {
+        this.lSum = lSum;
+        this.rSum = rSum;
+        this.mSum = mSum;
+        this.iSum = iSum;
+    }
+}
+
+public int maxSubArray(int[] nums) {
+    return getInfo(nums, 0, nums.length - 1).mSum;
+}
+
+public Status getInfo(int[] a, int l, int r) {
+    if (l == r) {
+        return new Status(a[l], a[l], a[l], a[l]);
+    }
+    int m = (l + r) >> 1;
+    Status lSub = getInfo(a, l, m);
+    Status rSub = getInfo(a, m + 1, r);
+    return pushUp(lSub, rSub);
+}
+
+public Status pushUp(Status l, Status r) {
+    int iSum = l.iSum + r.iSum;
+    int lSum = Math.max(l.lSum, l.iSum + r.lSum);
+    int rSum = Math.max(r.rSum, r.iSum + l.rSum);
+    int mSum = Math.max(Math.max(l.mSum, r.mSum), l.rSum + r.lSum);
+    return new Status(lSum, rSum, mSum, iSum);
 }
 ```
 
@@ -85,6 +154,39 @@ public String addBinary(String a, String b) {
     }
     if (carry > 0) {ans.append("1");}
     return ans.reverse().toString();
+}
+```
+
+70. Climbing Stairs 爬楼梯
+
+```
+climbing staircase. takes n steps to reach top.
+Each time either climb 1 or 2 steps. In how many distinct ways can climb to top?
+
+Input: n = 3
+Output: 3
+Explanation: There are three ways to climb to the top.
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step
+```
+```
+爬楼梯，n阶到楼顶，每次1或2阶，到楼顶有多少不同方法。
+```
+
+```DP```
+```
+0数1案，1级1案，遍阶，阶案前案加前前案，返n阶案
+```
+```
+public int climbStairs(int n) {
+    int[] dp = new int[n + 1];
+    dp[0] = 1;
+    dp[1] = 1;
+    for (int i = 2; i <= n; i++) {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+    return dp[n];
 }
 ```
 
@@ -331,6 +433,75 @@ public TreeNode dc(int[] nums, int left, int right) {
     root.left = dc(nums, left, mid - 1);
     root.right = dc(nums, mid + 1, right);
     return root;
+}
+```
+
+118. Pascal's Triangle 杨辉三角
+
+```
+integer numRows, return first numRows of Pascal's triangle.
+In Pascal's triangle, each number is sum of two numbers directly above it.
+
+Input: numRows = 5
+Output: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
+```
+```
+非负整数numRows，生成杨辉三角numRows行。杨辉三角，每个数是左上方和右上方的数和。
+```
+
+```DP```
+```
+初1，遍行，行加1，行加上左加上右，行加1，加行，返答
+```
+```
+public List<List<Integer>> generate(int numRows) {
+    List<List<Integer>> ans = new ArrayList<>();
+    if (numRows == 0)return ans;
+    ans.add(new ArrayList<>(Arrays.asList(1)));
+
+    for (int i = 1; i < numRows; i++) {
+        List<Integer> row = new ArrayList<>();
+        row.add(1);
+        for (int j = 1; j < i; j++) {
+            int left = ans.get(i - 1).get(j - 1);
+            int right = ans.get(i - 1).get(j);
+            row.add(left + right);
+        }
+        row.add(1);
+        ans.add(row);
+    }
+    return ans;
+}
+```
+
+121. Best Time to Buy and Sell Stock 买卖股票最佳时机
+
+```
+array prices where prices[i] is price of stock on ith day.
+maximize profit by choosing day to buy stock and choosing different day in future to sell stock.
+Return maximum profit achieve from transaction. If cannot achieve any profit, return 0.
+
+Input: prices = [7,1,5,3,6,4]
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+```
+```
+价格数组，prices[i]第i天股票价格，某天买，另某天卖，返最大利润或0
+```
+```DP```
+```
+遍价，更小价，更大利，返利
+```
+```
+public int maxProfit(int[] prices) {
+    int minPrice = Integer.MAX_VALUE;
+    int maxProfit = 0;
+    for (int i = 0; i < prices.length; i++) {
+        if (prices[i] < minPrice) {minPrice = prices[i];}
+        if (prices[i] - minPrice > maxProfit) {maxProfit = prices[i] - minPrice;}
+    }
+    return maxProfit;
 }
 ```
 
@@ -743,6 +914,111 @@ public String reverseVowels(String s) {
 }
 ```
 
+392. Is Subsequence 判断子序列
+
+```
+two strings s and t, return true if s is subsequence of t, or false otherwise.
+
+subsequence of string is new string that is formed from original string by deleting some (can be none) of characters without disturbing relative positions of remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+
+Input: s = "abc", t = "ahbgdc"
+Output: true
+```
+```
+两字符串s和t，判断s是否t的子序列。字符串子序列是原始字符串删除一些字符不改变剩余字符相对位置形成新字符串。
+```
+```
+public boolean isSubsequence(String s, String t) {
+    if (s.isEmpty()) return true;
+    int ind = 0;
+    char[] sca = s.toCharArray();
+    for (char tChar : t.toCharArray()) {
+        if (ind < sca.length && sca[ind] == tChar) ind ++;
+    }
+    return ind == sca.length;
+}
+```
+```
+public boolean isSubsequence(String s, String t) {
+    if(s.length() == 0) return true;
+    if(t.length() == 0) return false;
+    int sDex = 0;
+    for(char ch : t.toCharArray()){
+        char sCh = s.charAt(sDex);
+        if(sCh == ch) sDex++;
+        if(sDex == s.length()) return true;
+    }
+    return false;
+}
+```
+```
+public boolean isSubsequence(String s, String t) {
+    int n = s.length(), m = t.length();
+
+    int[][] f = new int[m + 1][26];
+    for (int i = 0; i < 26; i++) {
+        f[m][i] = m;
+    }
+
+    for (int i = m - 1; i >= 0; i--) {
+        for (int j = 0; j < 26; j++) {
+            if (t.charAt(i) == j + 'a') {f[i][j] = i;}
+            else {f[i][j] = f[i + 1][j];}
+        }
+    }
+    int add = 0;
+    for (int i = 0; i < n; i++) {
+        if (f[add][s.charAt(i) - 'a'] == m) {return false;}
+        add = f[add][s.charAt(i) - 'a'] + 1;
+    }
+    return true;
+}
+```
+```
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        if("".equals(s)){
+            return true;
+        }
+        if(s.length() > t.length()){
+            return false;
+        }
+        boolean[][] dp = new boolean[s.length()][t.length()];
+        boolean flag =false;
+        for(int i = 0 ; i < t.length(); i++){
+            if(flag){
+                dp[0][i] = true;
+                continue;
+            }
+            if(s.charAt(0) == t.charAt(i)){
+                dp[0][i] = true;
+                flag = true;
+            }
+            
+        }
+
+
+        for(int i = 1; i < dp.length; i++){
+            boolean flag1 = false;
+            for(int j = 1; j < dp[0].length; j++ ){
+                if(flag1){
+                    dp[i][j] = true;
+                    continue;
+                }
+
+                if(s.charAt(i) == t.charAt(j)){
+                    dp[i][j] = dp[i-1][j-1];
+                    if(dp[i][j]){flag1 = true;}
+                }
+
+            }
+        }
+
+        return dp[s.length()-1][t.length()-1];
+    }
+}
+```
+
 412. Fizz Buzz 烟花
 
 ```
@@ -882,6 +1158,38 @@ public int islandPerimeter(int[][] grid) {
         }
     }
     return ans;
+}
+```
+
+509. Fibonacci Number 斐波那契数
+
+```
+Fibonacci numbers, commonly denoted F(n) form sequence, called the Fibonacci sequence, such that each number is sum of two preceding ones, starting from 0 and 1. That is,
+F(0) = 0, F(1) = 1
+F(n) = F(n - 1) + F(n - 2), for n > 1.
+n, calculate F(n).
+
+Input: n = 3
+Output: 2
+Explanation: F(3) = F(2) + F(1) = 1 + 1 = 2.
+```
+```
+斐波那契数序列，F(n)表示，从0和1开始，后面每项数字是前两项数和。
+```
+```
+数0、数1，遍N，数前数加前前数，返N数
+```
+```
+public int fib(int N) {
+    if (N <= 1) {return N;} 
+
+    int[] dp = new int[N + 1];
+    dp[1] = 1;
+    for (int i = 2; i <= N; i++) {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+    
+    return dp[N];
 }
 ```
 

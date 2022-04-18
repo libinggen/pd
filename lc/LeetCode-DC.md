@@ -12,25 +12,41 @@ Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
 Output: 6
 Explanation: [4,-1,2,1] has the largest sum = 6.
 ```
-
 ```
 整数数组，找最大和连续子数组，至少一个元素，返回最大和。子数组连续。
 ```
 
 ```DC```
 ```
-遍数，当数，现大当现，大大前现，返大
+左大右返最小值，取中，遍左、加总、大左大前加总，遍右、加总、大右大前加总，中加大左右，递左，递右，大大合大左右半
 ```
 ```
 public int maxSubArray(int[] nums) {
-    int c = nums[0];
-    int m = nums[0];
-    for (int i = 1; i < nums.length; i++) {
-        int n = nums[i];
-        c = Math.max(n, n + c);
-        m = Math.max(m, c);
+    return findMaxSubArray(0, nums.length - 1, nums);
+}
+
+private int findMaxSubArray(int left, int right, int[] numsArray) {
+    if (left > right) {return Integer.MIN_VALUE;}
+
+    int mid = Math.floorDiv(left + right, 2);
+    int curr = 0;
+    int maxLeftSum = 0;
+    int maxRightSum = 0;
+
+    for (int i = mid - 1; i >= left; i--) {
+        curr += numsArray[i];
+        maxLeftSum = Math.max(maxLeftSum, curr);
     }
-    return m;
+    curr = 0;
+    for (int i = mid + 1; i <= right; i++) {
+        curr += numsArray[i];
+        maxRightSum = Math.max(maxRightSum, curr);
+    }
+
+    int maxCombinedSum = numsArray[mid] + maxLeftSum + maxRightSum;
+    int leftHalf = findMaxSubArray(left, mid - 1, numsArray);
+    int rightHalf = findMaxSubArray(mid + 1, right, numsArray);
+    return Math.max(maxCombinedSum, Math.max(leftHalf, rightHalf));
 }
 ```
 

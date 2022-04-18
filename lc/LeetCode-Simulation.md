@@ -248,6 +248,67 @@ public String tictactoe(int[][] moves) {
 }
 ```
 
+1389. Create Target Array in the Given Order 按既定顺序创建目标数组
+
+```
+two arrays of integers nums and index. task is to create target array under the following rules:
+Initially target array is empty.
+From left to right read nums[i] and index[i], insert at index index[i] the value nums[i] in target array.
+Repeat previous step until there are no elements to read in nums and index.
+Return target array.
+It is guaranteed that insertion operations will be valid.
+
+Input: nums = [0,1,2,3,4], index = [0,1,2,2,1]
+Output: [0,4,1,3,2]
+Explanation:
+nums       index     target
+0            0        [0]
+1            1        [0,1]
+2            2        [0,1,2]
+3            2        [0,1,3,2]
+4            1        [0,4,1,3,2]
+```
+```
+两整数数组nums、index，创建目标数组。目标数组最初为空，从左到右读nums[i]、index[i]，目标数组下标index[i]插入值nums[i]，重复读完元素。返回数组。数字插入位置存在。
+```
+
+```Simulation```
+```
+遍数，有数后移一位，数标加，标数，返组
+```
+```
+public int[] createTargetArray(int[] nums, int[] index) {
+    int ans[] = new int[nums.length];
+    int count[] = new int[nums.length];
+
+    for (int i = 0; i < nums.length; i++) {
+        if (count[index[i]] == 1 || ans[index[i]] != 0) {
+            for (int j = nums.length - 1; j > index[i]; j--) {ans[j] = ans[j - 1];}
+        }
+        count[index[i]]++;
+        ans[index[i]] = nums[i];
+    }
+    
+    return ans;
+}
+```
+```
+遍数，加标数，遍数，取标数，返组
+```
+```
+public int[] createTargetArray(int[] nums, int[] index) {
+    List<Integer> list = new ArrayList<Integer>();
+    for (int i = 0; i < nums.length; ++i) {
+        list.add(index[i], nums[i]);
+    }
+    int[] ans = new int[nums.length];
+    for (int i = 0; i < nums.length; ++i) {
+        ans[i] = list.get(i);
+    }
+    return ans;
+}
+```
+
 1560. Most Visited Sector in a Circular Track 圆形赛道经过次数最多的扇区
 
 ```
