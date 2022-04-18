@@ -33,10 +33,10 @@
 | :- | :- | :- | :- | :- |
 | 存储属性: | var 属性名: 类型=初始值 |  | 函数定义: | mutating func函数名(外参名 形参:参数类型=默认值)->返回类型{} |
 | 计算属性: | var 属性名: 类型{get{} set{}} |  | 函数调用: | 函数名(外参名:实参) |
-| 属性观察 | willSet didSet oldValue newValue |  | 可变参数: | func函数名(形参:参数类型...)->返回类型{} |
-|  |  |  | 传出参数: | func函数名(inout形参:参数类型...)->返回类型{} |
-|  |  |  | 函数类型: | (参数类型,)->返回类型 |
-|  |  |  | 闭包: | ```{(形参:参数类型,)->(返回类型) in [weak self] 表达式``` |
+| 属性观察: | willSet didSet oldValue newValue |  | 可变参数: | func函数名(形参:参数类型...)->返回类型{} |
+| 属性包装器: | @Published @Statue @Binding @EnvironmentObject @ObservedObject @Environment |  | 传出参数: | func函数名(inout形参:参数类型...)->返回类型{} |
+| 惰性属性: | lazy |  | 函数类型: | (参数类型,)->返回类型 |
+| 类型属性: | static let 同类实例共享，override class、static let |  | 闭包: | ```{(形参:参数类型,)->(返回类型) in [weak self] 表达式``` |
 |  |  |  | 高阶函数: | ```sorted(by:)在前、map(_:)每个、filter(_:)选出、reduce(_:_:)初加``` |
 |  |  |  | 快参: | ```$0 1 2 3``` |
 
@@ -62,3 +62,7 @@
 | 全局队列 global: | background(后台操作)、utility(异步操作)、default(默认特殊)、user-Initiated(触发立返)、user-Interactive(主线阻塞)、unspecified(环境推断) |
 | GCD方法: | dispatch_async(异步操作)、dispatch_once(访问一次)、dispatch_group(多任务完成) |
 | Operation: | Operation(任务 Ready、Executing、Cancelled、finished)、BlockOperation(全局队列、并行多任务)、OperationQueue(多Op队列、maxConcurrentOperationCount)、取消(.cancle() :Operation{isCancelled})|
+
+|**Codable**|  |
+| :- | :- |
+| UUID: |  | 
