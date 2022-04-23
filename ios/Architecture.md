@@ -8,15 +8,19 @@
 ## MVVM、VIPER
 
 RCV UI{.reload()}|VMPI|ME UIblock()
+
 C .vms:VM,{associatedtype VmsType:VM} .ps:P,{associatedtype PsType:P} 
+
+CVPRIE
 
 |**MVVM**|  |  |**VIPER**|  |
 | :- | :- | :- | :- | :- |
-| View: | C.v C.vms V.vm，C.界面跳转、UI操作、用户交互传VM，C.vms() C.select{.vms.load()} V.init{vm.func{.reload()} |  | View: | C.v C.ps weak .r V.p，UI操作、用户交互传P C.p() C.select{ps.load()} V.init{p.func{.reload()} |
-| ViewModel: | .m weak .v，集合模型、收V交互 更新视图属性 修改模型数据 属性观察响应架构、.ini{.block={uiblock,}}.load{.m} |  | Presenter: | .i weak .r、 不改数据、响应交互调I .init{.i.blck={uiblock,}} .load{.i.load()} .r.present())|
-| Model: |weak .vm，属性、初始化 didSet{vm.block()}|  | Enity: |weak .i、属性、初始化、Set/Get didSet{i.block()}||
-|  |  |  | Interactor: | .m weak P，处理数据源，网络请求、数据传输、缓存、存储、实例 .load{.m} |
-|  |  |  | Router: | .c，界面跳转、组件切换，prsent(){.c}|
+| Protocol | protocol Type:class {var{get set} func()} |  | @UIApplicationMain | window.rootViewController |
+|  |  |  | Router: | static m{return c}，C() P() I() R()，界面跳转、组件切换 |
+| View: | C.v C.vms V.vm，C.界面跳转、UI操作、用户交互传VM，C.vms() C.select{.vms.load()} V.init{vm.func{.reload()} |  | View: | C.p C.v，UI操作、用户交互传P V.m() C.m{p.m() v.var=p.m()} |
+| ViewModel: | .m weak .v，集合模型、收V交互 更新视图属性 修改模型数据 属性观察响应架构、.ini{.block={uiblock,}}.load{.m} |  | Presenter: | .i .r weak .c、 不改数据、响应交互调 .m{i.m() c.m(r.m())} |
+|  |  |  | Interactor: | weak .p，处理数据源，网络请求、数据传输、缓存、存储、实例 .m{p.m()} |
+| Model: |weak .vm，属性、初始化 didSet{vm.block()}|  | Enity: | 属性、初始化、Set/Get |
 
 ## 面向协议
 ```
